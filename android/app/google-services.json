@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "5538227091",
+    "project_id": "connect-it-b8373",
+    "storage_bucket": "connect-it-b8373.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5538227091:android:0e60cb7be563a793fb7e66",
+        "android_client_info": {
+          "package_name": "com.example.connect_it"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU8dhEfbBH4xjQ5pc3XH9gmKT85UC9RMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
