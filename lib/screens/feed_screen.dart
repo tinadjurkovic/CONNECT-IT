@@ -35,7 +35,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return _buildFeedScreen(userProvider.getUser);
   }
 
-  Widget _buildFeedScreen(model.User user) {
+  Widget _buildFeedScreen(model.User? user) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backroundColor,
@@ -67,6 +67,7 @@ class _FeedScreenState extends State<FeedScreen> {
               );
 
               if (recipientUid != null) {
+                // ignore: use_build_context_synchronously
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -94,7 +95,7 @@ class _FeedScreenState extends State<FeedScreen> {
           Row(
             children: <Widget>[
               CircleAvatar(
-                backgroundImage: NetworkImage(user.photoUrl),
+                backgroundImage: NetworkImage(user!.photoUrl),
               ),
               Expanded(
                 child: Padding(

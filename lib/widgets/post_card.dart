@@ -129,7 +129,7 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
                 ),
-                widget.snap['uid'].toString() == userProvider.getUser.uid
+                widget.snap['uid'].toString() == userProvider.getUser!.uid
                     ? IconButton(
                         onPressed: () {
                           showDialog(
@@ -179,7 +179,7 @@ class _PostCardState extends State<PostCard> {
               onDoubleTap: () {
                 FireStoreMethods().likePost(
                   widget.snap['postId'].toString(),
-                  userProvider.getUser.uid,
+                  userProvider.getUser!.uid,
                   widget.snap['likes'],
                 );
                 setState(() {
@@ -227,7 +227,7 @@ class _PostCardState extends State<PostCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       style: const TextStyle(color: primaryColor),
@@ -243,11 +243,11 @@ class _PostCardState extends State<PostCard> {
                     children: <Widget>[
                       LikeAnimation(
                         isAnimating: widget.snap['likes']
-                            .contains(userProvider.getUser.uid),
+                            .contains(userProvider.getUser!.uid),
                         smallLike: true,
                         child: IconButton(
                           icon: widget.snap['likes']
-                                  .contains(userProvider.getUser.uid)
+                                  .contains(userProvider.getUser!.uid)
                               ? const Icon(
                                   Icons.emoji_emotions,
                                   color: Colors.yellow,
@@ -257,7 +257,7 @@ class _PostCardState extends State<PostCard> {
                                 ),
                           onPressed: () => FireStoreMethods().likePost(
                             widget.snap['postId'].toString(),
-                            userProvider.getUser.uid,
+                            userProvider.getUser!.uid,
                             widget.snap['likes'],
                           ),
                         ),
@@ -319,7 +319,7 @@ class _PostCardState extends State<PostCard> {
               ),
             ),
           ),
-          Divider(
+          const Divider(
             color: Color.fromARGB(255, 41, 48, 81),
             thickness: 0.5,
           )

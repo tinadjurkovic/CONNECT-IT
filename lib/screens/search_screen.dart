@@ -116,7 +116,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 (snapshot.data! as QuerySnapshot).docs[index]['postUrl'];
             return GestureDetector(
               onTap: () {
-                // Handle post tap
               },
               child: Image.network(
                 imageUrl,

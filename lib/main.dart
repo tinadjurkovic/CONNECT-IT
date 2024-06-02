@@ -1,8 +1,7 @@
  import 'package:connect_it/providers/user_provider.dart';
 import 'package:connect_it/responsive/mobile_screen_layout.dart';
 import 'package:connect_it/responsive/responsive_layout.dart';
-
-import 'package:connect_it/screens/signup_screen.dart';
+import 'package:connect_it/screens/login_screen.dart';
 import 'package:connect_it/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            return const SignUpScreen();
+            return const LoginScreen();
           },
         ),
       ),

@@ -49,7 +49,7 @@ class CommentCard extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: onDelete,
                           ),
                         ],
@@ -71,7 +71,7 @@ class CommentCard extends StatelessWidget {
             ],
           ),
         ),
-        Divider(height: 3, color: Color.fromARGB(255, 4, 2, 49), thickness: 0.5,), // Add a thin line between comments
+        const Divider(height: 3, color: Color.fromARGB(255, 4, 2, 49), thickness: 0.5,),
       ],
     );
   }

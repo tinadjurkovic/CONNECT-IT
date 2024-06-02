@@ -10,20 +10,22 @@ import 'package:flutter/material.dart';
 List<Widget> homeScreenItems = [
   const FeedScreen(),
   const SearchScreen(),
-  const NotificationsScreen(),
+  NotificationsScreen(),
   ProfileScreen(
-    uid: FirebaseAuth.instance.currentUser?.uid ?? '', // Provide a fallback
+    uid: FirebaseAuth.instance.currentUser?.uid ?? '',
   ),
   FutureBuilder<String>(
     future: _getRecipientUid(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const CircularProgressIndicator();
-      } else if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
-        return Center(child: Text('No recent chat available')); // Better error handling
+      } else if (snapshot.hasError ||
+          !snapshot.hasData ||
+          snapshot.data!.isEmpty) {
+        return const Center(child: Text('No recent chat available'));
       } else {
         return ChatScreen(
-          currentUserUid: FirebaseAuth.instance.currentUser?.uid ?? '', // Provide a fallback
+          currentUserUid: FirebaseAuth.instance.currentUser?.uid ?? '',
           recipientUid: snapshot.data!,
         );
       }
@@ -36,8 +38,8 @@ Future<String> _getRecipientUid() async {
   if (currentUserUid.isEmpty) {
     return '';
   }
-  
-  String recipientUid = ''; 
+
+  String recipientUid = '';
   try {
     QuerySnapshot recipientSnapshot = await FirebaseFirestore.instance
         .collection('messages')

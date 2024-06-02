@@ -20,19 +20,16 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  //final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
   bool _isLoading = false;
-  //String? _passwordMatchError;
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    //_confirmPasswordController.dispose();
     _bioController.dispose();
     _usernameController.dispose();
   }
@@ -158,16 +155,7 @@ void signUpUser() async {
               const SizedBox(
                 height: 24,
               ),
-              //text field for confirming my password
-              //  TextFieldInput(
-              //   textEditingController: _confirmPasswordController,
-              //   hintText: 'Confirm your password',
-              //   textInputType: TextInputType.text,
-              //   isPass: true,
-              // ),
-              // const SizedBox(
-              //   height: 24,
-              // ),
+              
               TextFieldInput(
                   textEditingController: _bioController,
                   hintText: 'What makes you an IT enthusiast?',

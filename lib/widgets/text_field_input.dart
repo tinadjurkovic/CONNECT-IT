@@ -54,7 +54,7 @@ class TextFieldInput extends StatelessWidget {
       ),
       keyboardType: textInputType,
       obscureText: isPass,
-      style: TextStyle(color: Color.fromARGB(255, 32, 65, 122), fontSize: 14.5),
+      style: const TextStyle(color: Color.fromARGB(255, 32, 65, 122), fontSize: 14.5),
     );
   }
 }

@@ -96,10 +96,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   buildStatColumn(followers, "connectors"),
-                  const SizedBox(width: 200),
                   buildStatColumn(following, "connections"),
                 ],
               ),

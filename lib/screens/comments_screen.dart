@@ -12,6 +12,7 @@ class CommentsScreen extends StatefulWidget {
   const CommentsScreen({Key? key, required this.postId}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CommentsScreenState createState() => _CommentsScreenState();
 }
 
@@ -39,6 +40,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
         });
       }
     } catch (err) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(err.toString()),
@@ -51,6 +53,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     try {
       await FireStoreMethods().deleteComment(postId, commentId);
     } catch (err) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(err.toString()),
@@ -65,7 +68,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     final User? user = userProvider.getUser;
 
     if (user == null) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -91,13 +94,13 @@ class _CommentsScreenState extends State<CommentsScreen> {
           }
 
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text('Error loading comments'),
             );
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No comments yet'),
             );
           }
@@ -111,18 +114,18 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text(
+                      title: const Text(
                         'Delete Comment',
                         style: TextStyle(color: Colors.white),
                       ),
-                      content: Text(
+                      content: const Text(
                         'Are you sure you want to delete this comment?',
                         style: TextStyle(color: Colors.white),
                       ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text(
+                          child: const Text(
                             'CANCEL',
                             style: TextStyle(color: Colors.white),
                           ),
@@ -135,7 +138,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                             );
                             Navigator.of(context).pop();
                           },
-                          child: Text(
+                          child: const Text(
                             'DELETE',
                             style: TextStyle(color: Colors.white),
                           ),

@@ -4,7 +4,6 @@ import 'package:connect_it/models/user.dart' as model;
 import 'package:connect_it/resources/storage_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,8 +11,18 @@ class AuthMethods {
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
 
-    DocumentSnapshot documentSnapshot =
-        await _firestore.collection('users').doc(currentUser.uid).get();
+    DocumentSnapshot documentSnapshot = await _firestore.collection('users').doc(currentUser.uid).get();
+
+    if (!documentSnapshot.exists) {
+      print("User document does not exist");
+      throw Exception("User does not exist");
+    }
+
+    var data = documentSnapshot.data() as Map<String, dynamic>?;
+    if (data == null) {
+      print("User document data is null");
+      throw Exception("User data is null");
+    }
 
     return model.User.fromSnap(documentSnapshot);
   }

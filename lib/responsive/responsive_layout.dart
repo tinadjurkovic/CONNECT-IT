@@ -12,6 +12,9 @@ class ResponsiveLayout extends StatefulWidget {
 }
 
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+  bool _isLoading = true;
+  String? _error;
+
   @override
   void initState() {
     super.initState();
@@ -19,14 +22,40 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   }
 
   addData() async {
-    UserProvider userProvider = Provider.of(context, listen: false);
-    await userProvider.refreshUser();
+    try {
+      UserProvider userProvider = Provider.of(context, listen: false);
+      await userProvider.refreshUser();
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return widget.mobileScreenLayout;
-    });
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else if (_error != null) {
+      return Scaffold(
+        body: Center(
+          child: Text("Error loading data: $_error"),
+        ),
+      );
+    } else {
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          return widget.mobileScreenLayout;
+        },
+      );
+    }
   }
 }
