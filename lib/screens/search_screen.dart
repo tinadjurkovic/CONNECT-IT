@@ -65,23 +65,24 @@ class _SearchScreenState extends State<SearchScreen> {
         return ListView.builder(
           itemCount: (snapshot.data! as QuerySnapshot).docs.length,
           itemBuilder: (context, index) {
+            var userDoc = (snapshot.data! as QuerySnapshot).docs[index];
+            var userData = userDoc.data() as Map<String, dynamic>?;
+            var photoUrl = userData?.containsKey('photoUrl') ?? false
+                ? userData!['photoUrl']
+                : 'https://via.placeholder.com/150'; // placeholder image URL
             return InkWell(
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ProfileScreen(
-                      uid: (snapshot.data! as QuerySnapshot).docs[index]
-                          ['uid']),
+                  builder: (context) => ProfileScreen(uid: userDoc['uid']),
                 ),
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    (snapshot.data! as QuerySnapshot).docs[index]['photoUrl'],
-                  ),
+                  backgroundImage: NetworkImage(photoUrl),
                   radius: 16,
                 ),
                 title: Text(
-                  (snapshot.data! as QuerySnapshot).docs[index]['username'],
+                  userDoc['username'],
                 ),
               ),
             );
@@ -108,15 +109,14 @@ class _SearchScreenState extends State<SearchScreen> {
             crossAxisCount: 2,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
-            childAspectRatio: 1.0, 
+            childAspectRatio: 1.0,
           ),
           itemCount: (snapshot.data! as QuerySnapshot).docs.length,
           itemBuilder: (context, index) {
             final imageUrl =
                 (snapshot.data! as QuerySnapshot).docs[index]['postUrl'];
             return GestureDetector(
-              onTap: () {
-              },
+              onTap: () {},
               child: Image.network(
                 imageUrl,
                 fit: BoxFit.cover,

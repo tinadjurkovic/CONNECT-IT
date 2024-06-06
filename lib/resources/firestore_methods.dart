@@ -229,4 +229,21 @@ class FireStoreMethods {
       return query.docs;
     });
   }
+
+  Future<void> sendMessageNotification(
+      String senderUid, String receiverUid) async {
+    try {
+      await _firestore
+          .collection('notifications')
+          .doc(receiverUid)
+          .collection('userNotifications')
+          .add({
+        'type': 'message',
+        'senderUid': senderUid,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print("Error sending message notification: $e");
+    }
+  }
 }

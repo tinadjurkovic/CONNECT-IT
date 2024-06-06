@@ -34,52 +34,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _usernameController.dispose();
   }
 
-void selectImage() async {
-  final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-  if (pickedImage != null) {
-    final imageBytes = await pickedImage.readAsBytes();
-    if (mounted) {
-      setState(() {
-        _image = Uint8List.fromList(imageBytes);
-      });
+  void selectImage() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      final imageBytes = await pickedImage.readAsBytes();
+      if (mounted) {
+        setState(() {
+          _image = Uint8List.fromList(imageBytes);
+        });
+      }
     }
   }
-}
 
-
-
-void signUpUser() async {
-  setState(() {
-    _isLoading = true;
-  });
-  String res = await AuthMethods().signUpUser(
-    email: _emailController.text,
-    password: _passwordController.text,
-    username: _usernameController.text,
-    bio: _bioController.text,
-    file: _image!,
-  );
-
-  if (mounted) { 
+  void signUpUser() async {
     setState(() {
-      _isLoading = false;
+      _isLoading = true;
     });
-  }
-  
-  if (mounted && res != 'success') { 
-    // ignore: use_build_context_synchronously
-    showSnackBar(res, context);
-  } else if (mounted) { 
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout(),
-        ),
-      ),
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
     );
+
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+
+    if (mounted && res != 'success') {
+      // ignore: use_build_context_synchronously
+      showSnackBar(res, context);
+    } else if (mounted) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
+        ),
+      );
+    }
   }
-}
 
   void navigateToLogin() {
     Navigator.of(context).push(MaterialPageRoute(
@@ -131,14 +130,13 @@ void signUpUser() async {
                 height: 24,
               ),
               TextFieldInput(
-                  textEditingController: _usernameController,
-                  hintText: 'Create your username',
-                  textInputType: TextInputType.text,
-                  ),
+                textEditingController: _usernameController,
+                hintText: 'Create your username',
+                textInputType: TextInputType.text,
+              ),
               const SizedBox(
                 height: 64,
               ),
-
               TextFieldInput(
                   textEditingController: _emailController,
                   hintText: 'Enter your email',
@@ -155,7 +153,6 @@ void signUpUser() async {
               const SizedBox(
                 height: 24,
               ),
-              
               TextFieldInput(
                   textEditingController: _bioController,
                   hintText: 'What makes you an IT enthusiast?',
@@ -163,11 +160,10 @@ void signUpUser() async {
               const SizedBox(
                 height: 24,
               ),
-
               InkWell(
                 onTap: signUpUser,
                 child: Container(
-                  width: 85,
+                  width: 150,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: const ShapeDecoration(
@@ -186,7 +182,7 @@ void signUpUser() async {
                             color: primaryColor,
                           ),
                         )
-                      : const Text('Sign in'),
+                      : const Text('Sign up and Sign in'),
                 ),
               ),
               const SizedBox(

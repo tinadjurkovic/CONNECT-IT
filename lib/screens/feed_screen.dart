@@ -39,7 +39,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backroundColor,
-        centerTitle: false,
+        centerTitle: true,
         title: Image.asset(
           'assets/logo.png',
           height: 100,
@@ -54,7 +54,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 MaterialPageRoute(
                   builder: (context) => Scaffold(
                     appBar: AppBar(
-                      title: const Text('Add Recipient'),
+                      title: const Text('Recipient'),
                       backgroundColor: backroundColor,
                     ),
                     body: SearchableUserList(
@@ -138,8 +138,8 @@ class _FeedScreenState extends State<FeedScreen> {
                 user.photoUrl,
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.white, 
-                padding: EdgeInsets.zero, 
+                primary: Colors.white,
+                padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -147,10 +147,8 @@ class _FeedScreenState extends State<FeedScreen> {
               child: const Text(
                 'Post',
                 style: TextStyle(
-                  color:
-                      backroundColor, 
-                  fontSize:
-                      14, 
+                  color: backroundColor,
+                  fontSize: 14,
                 ),
               ),
             ),
@@ -244,14 +242,14 @@ class _FeedScreenState extends State<FeedScreen> {
         _descriptionController.text,
         _file,
         uid,
-        username, 
-        profImage, 
+        username,
+        profImage,
       );
       if (res == "success") {
         setState(() {
           isLoading = false;
           _descriptionController.clear();
-          _file = null; 
+          _file = null;
         });
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(

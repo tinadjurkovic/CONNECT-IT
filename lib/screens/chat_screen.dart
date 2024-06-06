@@ -63,6 +63,8 @@ class _ChatScreenState extends State<ChatScreen> {
         'content': messageText,
         'timestamp': FieldValue.serverTimestamp(),
       }).then((value) {
+        FireStoreMethods().sendMessageNotification(
+            currentUserUid, widget.recipientUid); // Send notification
         print('Message sent successfully!');
       }).catchError((error) {
         print('Error sending message: $error');
@@ -77,12 +79,6 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text(recipientUsername.isEmpty ? 'Chat' : recipientUsername),
         backgroundColor: backroundColor,
-        actions: [
-          IconButton(
-            onPressed: _navigateToAddRecipientScreen,
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -176,7 +172,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Recipient'),
+          title: const Text('Recipient'),
           backgroundColor: backroundColor,
         ),
         body: SearchableUserList(

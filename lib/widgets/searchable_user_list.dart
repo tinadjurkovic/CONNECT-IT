@@ -8,7 +8,6 @@ class SearchableUserList extends StatefulWidget {
       : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _SearchableUserListState createState() => _SearchableUserListState();
 }
 
@@ -55,13 +54,13 @@ class _SearchableUserListState extends State<SearchableUserList> {
         return ListView.builder(
           itemCount: (snapshot.data! as QuerySnapshot).docs.length,
           itemBuilder: (context, index) {
+            var userDoc = (snapshot.data! as QuerySnapshot).docs[index];
             return ListTile(
               title: Text(
-                (snapshot.data! as QuerySnapshot).docs[index]['username'],
+                userDoc['username'],
               ),
               onTap: () {
-                final recipientUid =
-                    (snapshot.data! as QuerySnapshot).docs[index]['uid'];
+                final recipientUid = userDoc['uid'] ?? 0;
                 widget.onRecipientSelected(recipientUid);
               },
             );
